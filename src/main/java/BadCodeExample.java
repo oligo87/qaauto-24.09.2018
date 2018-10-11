@@ -24,7 +24,6 @@ public class BadCodeExample {
         List<WebElement> searchResults = webDriver.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
         System.out.println("Search results count: "+searchResults.size());
 
-       // for(int i =0;i<searchResults.size();i++) {
          for (WebElement searchResult : searchResults) {
             String elementText = searchResult.getText();
             System.out.println(elementText);
