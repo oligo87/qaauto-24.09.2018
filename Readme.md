@@ -1,9 +1,3 @@
-- Add 'Tools installation' section with description of tools that needs to be installed
-- Add 'Tools setup' section with description of any additional setup
-- Explain purpose of pom.xml and .gitignore files.
-- Explain how to run your current test scenario.
-- Commit and Push README.md into git repository.
-
 Tools installation
     Geckodriver (latest) from https://github.com/mozilla/geckodriver/releases
     Firefox (latest)
