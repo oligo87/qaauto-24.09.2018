@@ -5,6 +5,8 @@ Tools installation
 
 Tools setup
     Geckodriver. Unzip and put into /system32
+    JDK. default install
+    Firefox. default install
 
-.gitignore - contains folders/files to be NOT uploaded to GIT
+.gitignore - contains list of folders/files to be excluded for GIT sync
 pom.xml - contains info about project and its configuration. Is needed for Maven
