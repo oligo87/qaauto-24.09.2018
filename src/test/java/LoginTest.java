@@ -1,4 +1,6 @@
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -23,10 +25,20 @@ public class LoginTest {
     public void successfullLoginTest() {
         WebDriver webDriver = new FirefoxDriver();
         webDriver.get("https://linkedin.com");
+
         Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/","Home page URL is wrong.");
 
+        WebElement emailField = webDriver.findElement(By.xpath("//*[@id='login-email']"));
+        emailField.sendKeys("pushkin.oligo+1@gmail.com");
+
+        WebElement passwordField = webDriver.findElement(By.xpath("//*[@id='login-password']"));
+        passwordField.sendKeys("myPasswordQA18");
+
+        WebElement singinButton = webDriver.findElement(By.xpath("//*[@id='login-submit']"));
+        singinButton.click();
 
         Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/feed/","Home page URL is wrong.");
+
         webDriver.quit();
     }
 }
