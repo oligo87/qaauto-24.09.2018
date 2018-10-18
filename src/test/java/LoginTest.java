@@ -3,9 +3,23 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 public class LoginTest {
+    WebDriver webDriver;
+
+    @BeforeMethod
+    public void beforeMethod() {
+        webDriver = new FirefoxDriver();
+    }
+
+    @AfterMethod
+    public void afterMethod() {
+        webDriver.quit();
+    }
+
     /**
      * Preconditions:
      * - Open FF browser
@@ -23,22 +37,35 @@ public class LoginTest {
      */
     @Test
     public void successfullLoginTest() {
-        WebDriver webDriver = new FirefoxDriver();
         webDriver.get("https://linkedin.com");
+        LoginPage loginPage = new LoginPage(webDriver);
 
-        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/","Home page URL is wrong.");
+        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/","Login page URL is wrong.");
 
-        WebElement emailField = webDriver.findElement(By.xpath("//*[@id='login-email']"));
-        emailField.sendKeys("pushkin.oligo+1@gmail.com");
-
-        WebElement passwordField = webDriver.findElement(By.xpath("//*[@id='login-password']"));
-        passwordField.sendKeys("myPasswordQA18");
-
-        WebElement singinButton = webDriver.findElement(By.xpath("//*[@id='login-submit']"));
-        singinButton.click();
+        loginPage.login("pushkin.oligo+1@gmail.com","myPasswordQA18");
 
         Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/feed/","Home page URL is wrong.");
+    }
+    @Test
+    public void negativeLoginTest() {
+        webDriver.get("https://linkedin.com");
+        LoginPage loginPage = new LoginPage(webDriver);
 
-        webDriver.quit();
+        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/","Login page URL is wrong.");
+
+        loginPage.login("a@b.c","");
+
+        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/","Login page URL is wrong.");
+    }
+    @Test
+    public void negativeLoginTest2() {
+        webDriver.get("https://linkedin.com");
+        LoginPage loginPage = new LoginPage(webDriver);
+
+        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/","Login page URL is wrong.");
+
+        loginPage.login("pushkin.oligo+1@gmail.com","Qwerty123");
+
+        Assert.assertEquals(webDriver.getCurrentUrl(),"https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME","LoginSubmit page URL is wrong.");
     }
 }
