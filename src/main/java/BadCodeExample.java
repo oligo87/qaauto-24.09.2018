@@ -20,21 +20,20 @@ public class BadCodeExample {
         WebElement searchField = webDriver.findElement(By.xpath("//*[@id='lst-ib']"));
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.ENTER);
+
         sleep(3000);
+
         List<WebElement> searchResults = webDriver.findElements(By.xpath("//div[@class='srg']/div[@class='g']"));
+
         System.out.println("Search results count: "+searchResults.size());
 
-         for (WebElement searchResult : searchResults) {
-            String elementText = searchResult.getText();
-            System.out.println(elementText);
-
-            if(elementText.toLowerCase().contains(searchTerm.toLowerCase()))
-            {
-                System.out.println("searchTerm "+searchTerm+" was found");
-            }
-            else
-            {
-                System.out.println("searchTerm "+searchTerm+" was NOT found");
+        for (WebElement searchResult : searchResults) {
+            String searchResultText = searchResult.getText();
+            System.out.println(searchResultText);
+            if (searchResultText.toLowerCase().contains(searchTerm.toLowerCase())) {
+                System.out.println("searchTerm "+ searchTerm +" was found.");
+            } else {
+                System.out.println("searchTerm "+ searchTerm +" was NOT found.");
             }
         }
 

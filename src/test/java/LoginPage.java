@@ -1,17 +1,24 @@
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
+
     private WebDriver webDriver;
 
-    private WebElement emailField;
-    private WebElement passwordField;
-    private WebElement signinButton;
+    @FindBy(xpath = "//*[@id='login-email']")
+    private WebElement userEmailField;
+
+    @FindBy(xpath = "//*[@id='login-password']")
+    private WebElement userPasswordField;
+
+    @FindBy(xpath = "//*[@id='login-submit']")
+    private WebElement signInButton;
 
     public LoginPage(WebDriver webDriver) {
         this.webDriver = webDriver;
-        initElements();
+        PageFactory.initElements(webDriver, this);
     }
 
     public boolean isPageLoaded() {
@@ -21,18 +28,13 @@ public class LoginPage {
     }
 
     public boolean isSignInButtonDisplayed() {
-        return signinButton.isDisplayed();
+        return signInButton.isDisplayed();
     }
 
-    private void initElements(){
-        emailField = webDriver.findElement(By.xpath("//*[@id='login-email']"));
-        passwordField = webDriver.findElement(By.xpath("//*[@id='login-password']"));
-        signinButton = webDriver.findElement(By.xpath("//*[@id='login-submit']"));
-    }
-
-    public void login(String userEmail, String userPassword){
-        emailField.sendKeys(userEmail);
-        passwordField.sendKeys(userPassword);
-        signinButton.click();
+    public HomePage login(String userEmail, String userPassword){
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+        return new HomePage(webDriver);
     }
 }
