@@ -40,10 +40,10 @@ public class LoginTest {
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        HomePage homePage = loginPage.login("linkedin.tst.yanina@gmail.com", "Test123!");
+        HomePage homePage = loginPage.login("pushkin.oligo+1@gmail.com", "myPasswordQA18");
 
         Assert.assertTrue(homePage.isPageLoaded(),
-                "HomePage is not displayed on Login page.");
+                "HomePage is not displayed");
     }
 
     @Test
@@ -51,13 +51,11 @@ public class LoginTest {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
 
-        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
-                "Login page URL is wrong.");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
         loginPage.login("a@b.c", "");
 
-        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
-                "Login page URL is wrong.");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is loaded.");
     }
 
     @Test
@@ -65,12 +63,11 @@ public class LoginTest {
         webDriver.get("https://linkedin.com");
         LoginPage loginPage = new LoginPage(webDriver);
 
-        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
-                "Login page URL is wrong.");
+        Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        loginPage.login("linkedin.tst.yanina@gmail.com", "wrong");
+        LoginSubmitPage loginSubmitPage = loginPage.login2("pushkin.oligo+1@gmail.com", "wrong");
 
-        Assert.assertEquals(webDriver.getCurrentUrl(), "https://www.linkedin.com/",
-                "Login-Submit page URL is wrong.");
+        Assert.assertTrue(loginSubmitPage.isPageLoaded(), "Login-Submit page URL is wrong.");
+
     }
 }
