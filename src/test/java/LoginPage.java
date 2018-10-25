@@ -37,7 +37,13 @@ public class LoginPage {
         signInButton.click();
         return new HomePage(webDriver);
     }
-    public LoginSubmitPage login2(String userEmail, String userPassword){
+    public LoginSubmitPage wrongPasswordLogin(String userEmail, String userPassword){
+        userEmailField.sendKeys(userEmail);
+        userPasswordField.sendKeys(userPassword);
+        signInButton.click();
+        return new LoginSubmitPage(webDriver);
+    }
+    public LoginSubmitPage emptyPasswordLogin(String userEmail, String userPassword){
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();

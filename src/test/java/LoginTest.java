@@ -42,8 +42,7 @@ public class LoginTest {
 
         HomePage homePage = loginPage.login("pushkin.oligo+1@gmail.com", "myPasswordQA18");
 
-        Assert.assertTrue(homePage.isPageLoaded(),
-                "HomePage is not displayed");
+        Assert.assertTrue(homePage.isPageLoaded(),"HomePage is not displayed");
     }
 
     @Test
@@ -53,7 +52,7 @@ public class LoginTest {
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        loginPage.login("a@b.c", "");
+        loginPage.emptyPasswordLogin("a@b.c", "");
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is loaded.");
     }
@@ -65,7 +64,7 @@ public class LoginTest {
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        LoginSubmitPage loginSubmitPage = loginPage.login2("pushkin.oligo+1@gmail.com", "wrong");
+        LoginSubmitPage loginSubmitPage = loginPage.wrongPasswordLogin("pushkin.oligo+1@gmail.com", "wrong");
 
         Assert.assertTrue(loginSubmitPage.isPageLoaded(), "Login-Submit page URL is wrong.");
 
