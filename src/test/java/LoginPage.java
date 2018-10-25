@@ -3,6 +3,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static java.lang.Thread.sleep;
+
 public class LoginPage {
 
     private WebDriver webDriver;
@@ -31,22 +33,35 @@ public class LoginPage {
         return signInButton.isDisplayed();
     }
 
-    public HomePage login(String userEmail, String userPassword){
+    public <T> T login(String userEmail, String userPassword){
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
-        return new HomePage(webDriver);
+        try {
+            sleep (3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        if (webDriver.getCurrentUrl().contains("/feed")) {
+            return (T) new HomePage(webDriver);
+        }
+        if (webDriver.getCurrentUrl().contains("/uas/login-submit")) {
+            return (T) new LoginSubmitPage(webDriver);
+        }
+        else {
+            return (T) new LoginPage(webDriver);
+        }
     }
-    public LoginSubmitPage wrongPasswordLogin(String userEmail, String userPassword){
+    /*public LoginSubmitPage wrongPasswordLogin(String userEmail, String userPassword){
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
         return new LoginSubmitPage(webDriver);
     }
-    public LoginSubmitPage emptyPasswordLogin(String userEmail, String userPassword){
+    public void emptyPasswordLogin(String userEmail, String userPassword){
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
-        return new LoginSubmitPage(webDriver);
-    }
+        //return new LoginSubmitPage(webDriver);
+    }*/
 }
