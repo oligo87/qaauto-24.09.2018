@@ -52,16 +52,4 @@ public class LoginPage {
             return (T) new LoginPage(webDriver);
         }
     }
-    /*public LoginSubmitPage wrongPasswordLogin(String userEmail, String userPassword){
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        return new LoginSubmitPage(webDriver);
-    }
-    public void emptyPasswordLogin(String userEmail, String userPassword){
-        userEmailField.sendKeys(userEmail);
-        userPasswordField.sendKeys(userPassword);
-        signInButton.click();
-        //return new LoginSubmitPage(webDriver);
-    }*/
 }

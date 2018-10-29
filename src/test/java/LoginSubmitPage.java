@@ -6,8 +6,14 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginSubmitPage {
     private WebDriver webDriver;
 
-    @FindBy(xpath = "//*[@id='control_gen_1']")
-    private WebElement AlertError;
+    @FindBy(xpath = "//div[@role='alert']")
+    private WebElement alertBox;
+
+    @FindBy (xpath = "//span[@id='session_key-login-error']")
+    private WebElement loginError;
+
+    @FindBy (xpath = "//span[@id='session_password-login-error']")
+    private WebElement passwordError;
 
     public LoginSubmitPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -17,7 +23,18 @@ public class LoginSubmitPage {
     public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME")
                 && webDriver.getTitle().contains("LinkedIn")
-                && AlertError.isDisplayed();
+                && alertBox.isDisplayed();
     }
 
+    public String getAlertMessageText() {
+        return alertBox.getText();
+    }
+
+    public String getEmailValidationMessage() {
+        return loginError.getText();
+    }
+
+    public String getPasswordValidationMessage() {
+        return passwordError.getText();
+    }
 }
