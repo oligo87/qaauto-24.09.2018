@@ -6,8 +6,8 @@ import org.openqa.selenium.support.PageFactory;
 public class LoginSubmitPage {
     private WebDriver webDriver;
 
-    @FindBy(xpath = "//*[@id='global-alert-queue']")
-    private WebElement GlobalAlertWrapper;
+    @FindBy(xpath = "//*[@id='control_gen_1']")
+    private WebElement AlertError;
 
     public LoginSubmitPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -16,8 +16,8 @@ public class LoginSubmitPage {
 
     public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/uas/login-submit?loginSubmitSource=GUEST_HOME")
-                && webDriver.getTitle().contains("LinkedIn");
-               // && GlobalAlertWrapper.isDisplayed();
+                && webDriver.getTitle().contains("LinkedIn")
+                && AlertError.isDisplayed();
     }
 
 }
