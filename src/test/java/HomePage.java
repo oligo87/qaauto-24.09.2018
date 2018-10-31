@@ -1,3 +1,4 @@
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,6 +9,9 @@ public class HomePage {
 
     @FindBy(xpath = "//li[@id='profile-nav-item']")
     private WebElement profileNavItem;
+
+    @FindBy(xpath = "//input[@role='combobox']")
+    private WebElement searchField;
 
     public HomePage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -20,4 +24,9 @@ public class HomePage {
                 && profileNavItem.isDisplayed();
     }
 
+    public SearchResultsPage search(String searchTerm) {
+        searchField.sendKeys(searchTerm);
+        searchField.sendKeys(Keys.RETURN);
+        return new SearchResultsPage(webDriver);
+    }
 }

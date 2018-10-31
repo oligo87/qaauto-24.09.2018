@@ -1,9 +1,13 @@
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import static java.lang.Thread.sleep;
 
 public class SearchTest {
     WebDriver webDriver;
@@ -44,6 +48,20 @@ public class SearchTest {
 
         HomePage homePage = loginPage.login("pushkin.oligo+1@gmail.com", "myPasswordQA18");
 
-        Assert.assertTrue(homePage.isPageLoaded(),"HomePage is not displayed");
+        Assert.assertTrue(homePage.isPageLoaded(),"HomePage is not displayed.");
+
+        SearchResultsPage searchResultsPage = homePage.search("HR");
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        Assert.assertTrue(searchResultsPage.isPageLoaded(), "Search results page is not loaded.");
+        Assert.assertEquals(searchResultsPage.searchResults.size(), 5);
+
+        for (WebElement searchResult : searchResultsPage.searchResults){
+            String searchResultText = searchResult.getText();
+            Assert.assertTrue(searchResultText.toLowerCase().contains("hr"));
+        }
     }
 }
