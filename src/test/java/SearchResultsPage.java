@@ -2,6 +2,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import java.util.List;
 
@@ -24,4 +25,11 @@ public class SearchResultsPage {
                 && webDriver.getTitle().contains("LinkedIn")
                 && searchResultsList.isDisplayed();
     }
+
+    /*public boolean isSearchResultsRelevant() {
+         for (WebElement searchResult : searchResults){
+            Assert.assertTrue(searchResult.getText().toLowerCase().contains("hr"));
+         }
+         return
+    }*/
 }

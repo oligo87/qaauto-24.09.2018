@@ -51,17 +51,22 @@ public class SearchTest {
         Assert.assertTrue(homePage.isPageLoaded(),"HomePage is not displayed.");
 
         SearchResultsPage searchResultsPage = homePage.search("HR");
+
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         try {
             sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         Assert.assertTrue(searchResultsPage.isPageLoaded(), "Search results page is not loaded.");
-        Assert.assertEquals(searchResultsPage.searchResults.size(), 5);
+
+        Assert.assertEquals(searchResultsPage.searchResults.size(), 10);
+
+        //Assert.assertTrue(searchResultsPage.isSearchResultsRelevant());
 
         for (WebElement searchResult : searchResultsPage.searchResults){
-            String searchResultText = searchResult.getText();
-            Assert.assertTrue(searchResultText.toLowerCase().contains("hr"));
+            Assert.assertTrue(searchResult.getText().toLowerCase().contains("hr"));
         }
     }
 }
