@@ -4,16 +4,18 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.testng.Assert;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class SearchResultsPage {
     private WebDriver webDriver;
 
-    @FindBy(xpath = "//li[@class='search-result search-result__occluded-item ember-view']")
-    public List<WebElement> searchResults;
+    @FindBy(xpath = "//li[contains(@class,'search-result__occluded-item')]")
+    private List<WebElement> searchResultsList;
 
-    @FindBy(xpath = "//div[@class='search-results-page core-rail']")
-    private WebElement searchResultsList;
+    @FindBy(xpath = "//div[contains(@class, 'search-filters-bar')]")
+    private WebElement searchBar;
 
     public SearchResultsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
@@ -21,15 +23,21 @@ public class SearchResultsPage {
     }
 
     public boolean isPageLoaded() {
-        return webDriver.getCurrentUrl().contains("https://www.linkedin.com/search/results/all/")
-                && webDriver.getTitle().contains("LinkedIn")
-                && searchResultsList.isDisplayed();
+        return webDriver.getCurrentUrl().contains("/search/results/all/")
+                //&& webDriver.getTitle().contains("| Search | LinkedIn")
+                && searchBar.isDisplayed();
     }
 
-    /*public boolean isSearchResultsRelevant() {
-         for (WebElement searchResult : searchResults){
-            Assert.assertTrue(searchResult.getText().toLowerCase().contains("hr"));
-         }
-         return
-    }*/
+    public int getSearchResultsCount() {
+        return searchResultsList.size();
+    }
+
+    public List<String> getSearchResults() {
+        List<String> searchResultsStringList = new ArrayList<String>();
+        for (WebElement searchResult : searchResultsList){
+            String searchResultText = searchResult.getText();
+            searchResultsStringList.add(searchResultText);
+        }
+        return searchResultsStringList;
+    }
 }

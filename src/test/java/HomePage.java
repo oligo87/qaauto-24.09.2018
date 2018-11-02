@@ -4,13 +4,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import static java.lang.Thread.sleep;
+
 public class HomePage {
     private WebDriver webDriver;
 
     @FindBy(xpath = "//li[@id='profile-nav-item']")
     private WebElement profileNavItem;
 
-    @FindBy(xpath = "//input[@role='combobox']")
+    @FindBy(xpath = "//input[contains(@aria-owns,'results')]")
     private WebElement searchField;
 
     public HomePage(WebDriver webDriver) {
@@ -27,6 +29,11 @@ public class HomePage {
     public SearchResultsPage search(String searchTerm) {
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.RETURN);
+        try {
+            sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return new SearchResultsPage(webDriver);
     }
 }

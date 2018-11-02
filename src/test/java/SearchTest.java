@@ -7,6 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static java.lang.Thread.sleep;
 
 public class SearchTest {
@@ -44,29 +46,29 @@ public class SearchTest {
      */
     @Test
     public void basicSearchTest(){
+        String searchTerm = "HR";
+
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
         HomePage homePage = loginPage.login("pushkin.oligo+1@gmail.com", "myPasswordQA18");
 
         Assert.assertTrue(homePage.isPageLoaded(),"HomePage is not displayed.");
 
-        SearchResultsPage searchResultsPage = homePage.search("HR");
+        SearchResultsPage searchResultsPage = homePage.search(searchTerm);
 
         JavascriptExecutor js = (JavascriptExecutor) webDriver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         Assert.assertTrue(searchResultsPage.isPageLoaded(), "Search results page is not loaded.");
 
-        Assert.assertEquals(searchResultsPage.searchResults.size(), 10);
+        Assert.assertEquals(searchResultsPage.getSearchResultsCount(), 10, "SearchResultsCount is wrong.");
 
-        //Assert.assertTrue(searchResultsPage.isSearchResultsRelevant());
 
-        for (WebElement searchResult : searchResultsPage.searchResults){
-            Assert.assertTrue(searchResult.getText().toLowerCase().contains("hr"));
+        List<String> searchResultsList = searchResultsPage.getSearchResults();
+
+        for (String searchResult : searchResultsList){
+            Assert.assertTrue(searchResult.toLowerCase().contains(searchTerm.toLowerCase()), "SearchTerm "+searchTerm+ "is not found in "+searchResult);
         }
+
     }
 }
