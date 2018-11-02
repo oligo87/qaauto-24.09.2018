@@ -1,11 +1,10 @@
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class SearchResultsPage {
@@ -24,11 +23,13 @@ public class SearchResultsPage {
 
     public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().contains("/search/results/all/")
-                //&& webDriver.getTitle().contains("| Search | LinkedIn")
+                && webDriver.getTitle().contains("| Поиск | LinkedIn")
                 && searchBar.isDisplayed();
     }
 
     public int getSearchResultsCount() {
+        JavascriptExecutor js = (JavascriptExecutor) webDriver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         return searchResultsList.size();
     }
 
