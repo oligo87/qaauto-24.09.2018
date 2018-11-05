@@ -1,3 +1,5 @@
+package page;
+
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -6,8 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class HomePage {
-    private WebDriver webDriver;
+public class HomePage extends BasePage{
+
 
     @FindBy(xpath = "//li[@id='profile-nav-item']")
     private WebElement profileNavItem;

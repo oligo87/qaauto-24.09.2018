@@ -1,7 +1,10 @@
+package page;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import util.GMailService;
 
 import static java.lang.Thread.sleep;
 
@@ -35,8 +38,19 @@ public class RequestPasswordResetPage {
     }
 
     public RequestPasswordResetSubmitPage searchRegisteredEmail(String registeredEmail) {
+        GMailService gMailService = new GMailService();
+        gMailService.connect();
+
         userEmailInput.sendKeys(registeredEmail);
         resetPasswordSubmitButton.click();
+
+        String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
+        String messageTo = "pushkin.oligo+1@gmail.com";
+        String messageFrom = "security-noreply@linkedin.com";
+
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
+        System.out.println("Content: " + message);
+
         return new RequestPasswordResetSubmitPage(webDriver);
     }
 }
