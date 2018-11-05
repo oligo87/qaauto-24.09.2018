@@ -5,8 +5,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static java.lang.Thread.sleep;
-
 public class ResetPasswordTest {
     WebDriver webDriver;
     LoginPage loginPage;
@@ -33,12 +31,11 @@ public class ResetPasswordTest {
      * - Verify that request-password-reset page is loaded.
      * - Enter registered email into email field and click Search account btn.
      * - Verify that request-password-reset-submit page is loaded.
-     * - MANUAL ACTIONS
-     *
-     * - Verify that password-reset page is loaded.
-     * - Enter 'newPassword' into new password and confirmation fields and click Send btn.
+     * - MANUAL ACTIONS     *
+     * - Verify that password-reset page is loaded.     *
+     * - Enter 'newPassword' into new password and confirmation fields and click Send btn.     *
      * - Verify that password-reset-submit page is loaded.
-     * - Press  btn.
+     * - Press GoToHomePage btn.
      * - Verify that Home page is loaded.
      *
      * PostCondition:
@@ -52,11 +49,15 @@ public class ResetPasswordTest {
         Assert.assertTrue(requestPasswordResetPage.isPageLoaded(),"RequestPasswordResetPage is not displayed.");
 
         RequestPasswordResetSubmitPage requestPasswordResetSubmitPage = requestPasswordResetPage.searchRegisteredEmail("pushkin.oligo+1@gmail.com");
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         Assert.assertTrue(requestPasswordResetSubmitPage.isPageLoaded(),"RequestPasswordResetSubmitPage is not loaded.");
+
+        PasswordResetPage passwordResetPage = requestPasswordResetSubmitPage.manualLinkInsert();
+        Assert.assertTrue(passwordResetPage.isPageLoaded(), "PasswordResetPage is not loaded.");
+
+        PasswordResetSubmitPage passwordResetSubmitPage = passwordResetPage.resetPassword("myPasswordQA2018");
+        Assert.assertTrue(passwordResetSubmitPage.isPageLoaded(), "PasswordResetSubmitPage is not loaded.");
+
+        HomePage homePage = passwordResetSubmitPage.navigateToHomePage();
+        Assert.assertTrue(homePage.isPageLoaded(), "HomePage is not loaded.");
     }
 }
