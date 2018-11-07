@@ -27,8 +27,8 @@ public class GMailService {
      * @param args - dummy args for main()
      */
     public static void main(String[] args) {
-        String messageSubject = "Oleg, данное сообщение содержит ссылку для изменения пароля";
-        String messageTo = "pushkin.oligo+1@gmail.com";
+        String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
+        String messageTo = "oleg.ilin.amc@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
         GMailService gMailService = new GMailService();
@@ -41,8 +41,8 @@ public class GMailService {
      * Default util.GMailService constructor with predefined user/pass credentials
      */
     public GMailService(){
-        this.user = "pushkin.oligo@gmail.com";
-        this.pass = "";
+        this.user = "oleg.ilin.amc@gmail.com";
+        this.pass = "Zjktu123";
     }
 
     /**

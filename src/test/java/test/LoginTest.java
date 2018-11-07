@@ -27,9 +27,9 @@ public class LoginTest extends BaseTest{
      @DataProvider
      public Object[][] validDataProvider() {
          return new Object[][]{
-                 {"pushkin.oligo+1@gmail.com", "myPasswordQA18"},
-                 {"pushkin.OLIGO+1@gmail.com", "myPasswordQA18"},
-                 {" pushkin.oligo+1@gmail.com ", "myPasswordQA18"}
+                 {"oleg.ilin.amc@gmail.com", "myPasswordQA18"},
+                 {"oleg.ilin.amc@gmail.com", "myPasswordQA18"},
+                 {" oleg.ilin.amc@gmail.com ", "myPasswordQA18"}
          };
      }
     @Test(dataProvider = "validDataProvider")
@@ -44,7 +44,7 @@ public class LoginTest extends BaseTest{
     @DataProvider
     public Object[][] invalidDataProvider() {
         return new Object[][]{
-                {"pushkin.oligo+1@gmail.com", ""},
+                {"oleg.ilin.amc@gmail.com", ""},
                 {"", "myPasswordQA18"},
                 {"", ""}
         };
@@ -62,8 +62,8 @@ public class LoginTest extends BaseTest{
     @DataProvider
     public Object[][] loginSubmitDataProvider() {
         return new Object[][]{
-                {"pushkin.oligo+1@gmail.com", "wrong", "", "The password you provided must have at least 6 characters."},
-                {"pushkin.oligo+1@gmail.com", "longwrong", "", "Hmm, that's not the right password. Please try again or request a new one."},
+                {"oleg.ilin.amc@gmail.com", "wrong", "", "The password you provided must have at least 6 characters."},
+                {"oleg.ilin.amc@gmail.com", "longwrong", "", "Hmm, that's not the right password. Please try again or request a new one."},
                 {"a@b.c", "myPasswordQA18", "Please enter a valid email address.", ""},
                 {"a@b.c", "wrong", "Please enter a valid email address.", "The password you provided must have at least 6 characters."},
         };

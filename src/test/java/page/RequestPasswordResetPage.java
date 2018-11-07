@@ -45,11 +45,19 @@ public class RequestPasswordResetPage {
         resetPasswordSubmitButton.click();
 
         String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
-        String messageTo = "pushkin.oligo+1@gmail.com";
+        String messageTo = "oleg.ilin.amc@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
         System.out.println("Content: " + message);
+
+        String rawResetPasswordUrl = message.substring(message.indexOf("https://www.linkedin.com/e/"), message.indexOf("_sig=") + 19);
+        System.out.println("raw URL: " + rawResetPasswordUrl);
+
+        String resetPasswordUrl = rawResetPasswordUrl.replace("amp;", "");
+        System.out.println("URL: " + resetPasswordUrl);
+
+        webDriver.get(resetPasswordUrl);
 
         return new RequestPasswordResetSubmitPage(webDriver);
     }

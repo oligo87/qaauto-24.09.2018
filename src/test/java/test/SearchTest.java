@@ -32,7 +32,7 @@ public class SearchTest extends BaseTest{
 
         Assert.assertTrue(loginPage.isPageLoaded(), "Login page is not loaded.");
 
-        HomePage homePage = loginPage.login("pushkin.oligo+1@gmail.com", "myPasswordQA18");
+        HomePage homePage = loginPage.login("oleg.ilin.amc@gmail.com", "myPasswordQA18");
         Assert.assertTrue(homePage.isPageLoaded(),"page.HomePage is not displayed.");
 
         SearchResultsPage searchResultsPage = homePage.search(searchTerm);
