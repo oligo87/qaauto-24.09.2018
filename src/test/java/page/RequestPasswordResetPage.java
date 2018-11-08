@@ -4,6 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import util.GMailService;
 
 import static java.lang.Thread.sleep;
 
@@ -36,7 +37,7 @@ public class RequestPasswordResetPage extends BasePage{
     }
 
     public RequestPasswordResetSubmitPage searchRegisteredEmail(String registeredEmail) {
-        /*GMailService gMailService = new GMailService();*/
+        gMailService = new GMailService();
         gMailService.connect();
 
         userEmailInput.sendKeys(registeredEmail);

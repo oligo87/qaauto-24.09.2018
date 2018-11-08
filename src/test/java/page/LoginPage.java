@@ -57,6 +57,7 @@ public class LoginPage extends BasePage{
     }
 
     public RequestPasswordResetPage forgotPassword() {
+        waitUntilElementIsClickable(forgotPasswordLink);
         forgotPasswordLink.click();
         return new RequestPasswordResetPage(webDriver);
     }

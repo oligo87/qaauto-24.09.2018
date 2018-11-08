@@ -38,7 +38,7 @@ public class RequestPasswordResetSubmitPage extends BasePage{
         String messageTo = "oleg.ilin.amc@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 120);
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println("Content: " + message);
 
         String rawResetPasswordUrl = message.substring(message.indexOf("https://www.linkedin.com/e/"), message.indexOf("_sig=") + 19);

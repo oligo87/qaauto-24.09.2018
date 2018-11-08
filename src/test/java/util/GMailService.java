@@ -26,7 +26,7 @@ public class GMailService {
      * Example of GMailService usage
      * @param args - dummy args for main()
      */
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
         String messageTo = "oleg.ilin.amc@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
@@ -35,7 +35,7 @@ public class GMailService {
         gMailService.connect();
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println("Content: " + message);
-    }*/
+    }
 
     /**
      * Default util.GMailService constructor with predefined user/pass credentials
