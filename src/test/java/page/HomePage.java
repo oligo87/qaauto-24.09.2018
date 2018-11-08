@@ -10,7 +10,6 @@ import static java.lang.Thread.sleep;
 
 public class HomePage extends BasePage{
 
-
     @FindBy(xpath = "//li[@id='profile-nav-item']")
     private WebElement profileNavItem;
 

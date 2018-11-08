@@ -9,8 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchResultsPage {
-    private WebDriver webDriver;
+public class SearchResultsPage extends BasePage{
 
     @FindBy(xpath = "//li[contains(@class,'search-result__occluded-item')]")
     private List<WebElement> searchResultsList;

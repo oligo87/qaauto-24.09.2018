@@ -7,9 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class LoginPage {
-
-    private WebDriver webDriver;
+public class LoginPage extends BasePage{
 
     @FindBy(xpath = "//*[@id='login-email']")
     private WebElement userEmailField;

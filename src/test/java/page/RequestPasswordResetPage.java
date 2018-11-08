@@ -4,12 +4,10 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import util.GMailService;
 
 import static java.lang.Thread.sleep;
 
-public class RequestPasswordResetPage {
-    private WebDriver webDriver;
+public class RequestPasswordResetPage extends BasePage{
 
     @FindBy(xpath = "//input[contains(@validation-message,'Please enter your email or phone')]")
     private WebElement userEmailInput;
@@ -38,13 +36,13 @@ public class RequestPasswordResetPage {
     }
 
     public RequestPasswordResetSubmitPage searchRegisteredEmail(String registeredEmail) {
-        GMailService gMailService = new GMailService();
+        /*GMailService gMailService = new GMailService();*/
         gMailService.connect();
 
         userEmailInput.sendKeys(registeredEmail);
         resetPasswordSubmitButton.click();
 
-        String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
+        /*String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
         String messageTo = "oleg.ilin.amc@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
@@ -57,7 +55,7 @@ public class RequestPasswordResetPage {
         String resetPasswordUrl = rawResetPasswordUrl.replace("amp;", "");
         System.out.println("URL: " + resetPasswordUrl);
 
-        webDriver.get(resetPasswordUrl);
+        webDriver.get(resetPasswordUrl);*/
 
         return new RequestPasswordResetSubmitPage(webDriver);
     }

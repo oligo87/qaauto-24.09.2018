@@ -7,8 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 import static java.lang.Thread.sleep;
 
-public class PasswordResetPage {
-    private WebDriver webDriver;
+public class PasswordResetPage extends BasePage{
 
     @FindBy(xpath = "//input[@name='newPassword']")
     private WebElement newPasswordInput;
@@ -26,7 +25,7 @@ public class PasswordResetPage {
 
     public boolean isPageLoaded() {
         try {
-            sleep(3000);
+            sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
