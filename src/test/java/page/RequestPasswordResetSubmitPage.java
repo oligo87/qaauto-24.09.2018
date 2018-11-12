@@ -10,11 +10,17 @@ public class RequestPasswordResetSubmitPage extends BasePage{
     @FindBy (xpath = "//button[@id='resend-url']")
     private WebElement resendButton;
 
+    /**
+     * @param webDriver
+     */
     public RequestPasswordResetSubmitPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Method to verify that page is loaded with few conditions
+     */
     public boolean isPageLoaded() {
         waitUntilElementIsClickable(resendButton);
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/checkpoint/rp/request-password-reset-submit")

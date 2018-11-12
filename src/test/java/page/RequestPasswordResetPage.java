@@ -14,17 +14,29 @@ public class RequestPasswordResetPage extends BasePage{
     @FindBy(xpath = "//button[@id='reset-password-submit-button']")
     private WebElement resetPasswordSubmitButton;
 
+    /**
+     * Constructor for RequestPasswordResetPage
+     * @param webDriver driver instance from tests
+     */
     public RequestPasswordResetPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Method to verify that page is loaded with few conditions
+     */
     public boolean isPageLoaded() {
         waitUntilElementIsClickable(userEmailInput);
         return webDriver.getCurrentUrl().contains("request-password-reset")
                 && webDriver.getTitle().equals("Reset Password | LinkedIn");
     }
 
+    /**
+     * Method inputs registeredEmail into userEmail field and clicks submit.
+     * @param registeredEmail string registeredEmail
+     * @return PasswordResetPage
+     */
     public PasswordResetPage searchRegisteredEmail(String registeredEmail) {
         gMailService = new GMailService();
         gMailService.connect();

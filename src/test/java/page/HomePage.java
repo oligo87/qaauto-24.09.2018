@@ -14,17 +14,27 @@ public class HomePage extends BasePage{
     @FindBy(xpath = "//input[contains(@aria-owns,'results')]")
     private WebElement searchField;
 
+    /**
+     * Constructor for HomePage object
+     * @param webDriver driver instance from tests
+     */
     public HomePage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Method to verify that page is loaded with few conditions
+     */
     public boolean isPageLoaded() {
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/feed/")
                 && webDriver.getTitle().contains("LinkedIn")
                 && profileNavItem.isDisplayed();
     }
 
+    /**
+     * Method inputs searchTerm into searchField and presses RETURN
+     */
     public SearchResultsPage search(String searchTerm) {
         searchField.sendKeys(searchTerm);
         searchField.sendKeys(Keys.RETURN);

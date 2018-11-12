@@ -22,7 +22,7 @@ public abstract class BasePage {
     }
 
     /**
-     * Method for
+     * Method to verify that current url contains partialUrl
      * @param partialUrl
      * @param timeOutInSec
      * @return

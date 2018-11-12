@@ -17,21 +17,34 @@ public class SearchResultsPage extends BasePage{
     @FindBy(xpath = "//div[contains(@class, 'search-filters-bar')]")
     private WebElement searchBar;
 
+    /**
+     * Constructor for SearchResultsPage
+     * @param webDriver driver instance from tests
+     */
     public SearchResultsPage(WebDriver webDriver) {
         this.webDriver = webDriver;
         PageFactory.initElements(webDriver, this);
     }
 
+    /**
+     * Method to verify that page is loaded with few conditions
+     */
     public boolean isPageLoaded() {
         waitUntilElementIsClickable(searchBar);
         return webDriver.getCurrentUrl().contains("/search/results/all/")
                 && webDriver.getTitle().contains("| Поиск | LinkedIn");
     }
 
+    /**
+     * @return count of searchResultsList entries
+     */
     public int getSearchResultsCount() {
         return searchResultsList.size();
     }
 
+    /**
+     * @return consequently text of each entry of searchResultsList
+     */
     public List<String> getSearchResults() {
         List<String> searchResultsStringList = new ArrayList<String>();
         for (WebElement searchResult : searchResultsList){
