@@ -40,15 +40,11 @@ public class LoginPage extends BasePage{
         userEmailField.sendKeys(userEmail);
         userPasswordField.sendKeys(userPassword);
         signInButton.click();
-        try {
-            sleep (3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if (webDriver.getCurrentUrl().contains("/feed")) {
+
+        if (isUrlContains("/feed", 5)) {
             return (T) new HomePage(webDriver);
         }
-        if (webDriver.getCurrentUrl().contains("/uas/login-submit")) {
+        if (isUrlContains("/uas/login-submit", 5)) {
             return (T) new LoginSubmitPage(webDriver);
         }
         else {

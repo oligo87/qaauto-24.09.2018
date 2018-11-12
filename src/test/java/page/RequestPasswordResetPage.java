@@ -6,8 +6,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import util.GMailService;
 
-import static java.lang.Thread.sleep;
-
 public class RequestPasswordResetPage extends BasePage{
 
     @FindBy(xpath = "//input[contains(@validation-message,'Please enter your email or phone')]")
@@ -22,42 +20,30 @@ public class RequestPasswordResetPage extends BasePage{
     }
 
     public boolean isPageLoaded() {
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitUntilElementIsClickable(userEmailInput);
         return webDriver.getCurrentUrl().contains("request-password-reset")
-                && webDriver.getTitle().equals("Reset Password | LinkedIn")
-                && isUserEmailInputDisplayed();
+                && webDriver.getTitle().equals("Reset Password | LinkedIn");
     }
 
-    private boolean isUserEmailInputDisplayed() {
-        return userEmailInput.isDisplayed();
-    }
-
-    public RequestPasswordResetSubmitPage searchRegisteredEmail(String registeredEmail) {
+    public PasswordResetPage searchRegisteredEmail(String registeredEmail) {
         gMailService = new GMailService();
         gMailService.connect();
 
         userEmailInput.sendKeys(registeredEmail);
         resetPasswordSubmitButton.click();
 
-        /*String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
+        String messageSubject = "данное сообщение содержит ссылку для изменения пароля";
         String messageTo = "oleg.ilin.amc@gmail.com";
         String messageFrom = "security-noreply@linkedin.com";
 
-        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 180);
+        String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println("Content: " + message);
 
-        String rawResetPasswordUrl = message.substring(message.indexOf("https://www.linkedin.com/e/"), message.indexOf("_sig=") + 19);
-        System.out.println("raw URL: " + rawResetPasswordUrl);
-
-        String resetPasswordUrl = rawResetPasswordUrl.replace("amp;", "");
+        String resetPasswordUrl = message.substring(message.indexOf("https://www.linkedin.com/e/"), message.indexOf("_sig=") + 19).replace("amp;", "");
         System.out.println("URL: " + resetPasswordUrl);
 
-        webDriver.get(resetPasswordUrl);*/
+        webDriver.get(resetPasswordUrl);
 
-        return new RequestPasswordResetSubmitPage(webDriver);
+        return new PasswordResetPage(webDriver);
     }
 }

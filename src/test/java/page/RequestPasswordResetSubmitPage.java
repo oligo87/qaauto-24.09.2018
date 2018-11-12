@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.sleep;
-
 public class RequestPasswordResetSubmitPage extends BasePage{
 
     @FindBy (xpath = "//button[@id='resend-url']")
@@ -18,18 +16,9 @@ public class RequestPasswordResetSubmitPage extends BasePage{
     }
 
     public boolean isPageLoaded() {
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitUntilElementIsClickable(resendButton);
         return webDriver.getCurrentUrl().equals("https://www.linkedin.com/checkpoint/rp/request-password-reset-submit")
-                && webDriver.getTitle().equals("Please check your mail for reset password link. | LinkedIn")
-                && isResendButtonDisplayed();
-    }
-
-    private boolean isResendButtonDisplayed() {
-        return resendButton.isDisplayed();
+                && webDriver.getTitle().equals("Please check your mail for reset password link. | LinkedIn");
     }
 
     public PasswordResetPage navigateToLinkFromEmail() {
@@ -41,10 +30,7 @@ public class RequestPasswordResetSubmitPage extends BasePage{
         String message = gMailService.waitMessage(messageSubject, messageTo, messageFrom, 60);
         System.out.println("Content: " + message);
 
-        String rawResetPasswordUrl = message.substring(message.indexOf("https://www.linkedin.com/e/"), message.indexOf("_sig=") + 19);
-        System.out.println("raw URL: " + rawResetPasswordUrl);
-
-        String resetPasswordUrl = rawResetPasswordUrl.replace("amp;", "");
+        String resetPasswordUrl = message.substring(message.indexOf("https://www.linkedin.com/e/"), message.indexOf("_sig=") + 19).replace("amp;", "");
         System.out.println("URL: " + resetPasswordUrl);
 
         webDriver.get(resetPasswordUrl);

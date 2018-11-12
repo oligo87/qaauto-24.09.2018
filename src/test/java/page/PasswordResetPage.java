@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.sleep;
-
 public class PasswordResetPage extends BasePage{
 
     @FindBy(xpath = "//input[@name='newPassword']")
@@ -24,23 +22,10 @@ public class PasswordResetPage extends BasePage{
     }
 
     public boolean isPageLoaded() {
-        try {
-            sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitUntilElementIsClickable(newPasswordInput);
+        waitUntilElementIsClickable(confirmPasswordInput);
         return webDriver.getCurrentUrl().contains("/rp/password-reset")
-                && webDriver.getTitle().equals("Reset Your Password | LinkedIn")
-                && isNewPasswordInputDisplayed()
-                && isConfirmPasswordInputDisplayed();
-    }
-
-    private boolean isNewPasswordInputDisplayed() {
-        return newPasswordInput.isDisplayed();
-    }
-
-    private boolean isConfirmPasswordInputDisplayed() {
-        return confirmPasswordInput.isDisplayed();
+                && webDriver.getTitle().equals("Reset Your Password | LinkedIn");
     }
 
     public PasswordResetSubmitPage resetPassword(String newPassword) {

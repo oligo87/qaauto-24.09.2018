@@ -23,20 +23,20 @@ public class SearchResultsPage extends BasePage{
     }
 
     public boolean isPageLoaded() {
+        waitUntilElementIsClickable(searchBar);
         return webDriver.getCurrentUrl().contains("/search/results/all/")
-                && webDriver.getTitle().contains("| Поиск | LinkedIn")
-                && searchBar.isDisplayed();
+                && webDriver.getTitle().contains("| Поиск | LinkedIn");
     }
 
     public int getSearchResultsCount() {
-        JavascriptExecutor js = (JavascriptExecutor) webDriver;
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         return searchResultsList.size();
     }
 
     public List<String> getSearchResults() {
         List<String> searchResultsStringList = new ArrayList<String>();
         for (WebElement searchResult : searchResultsList){
+            ((JavascriptExecutor) webDriver)
+                    .executeScript("arguments[0].scrollIntoView(true);", searchResult);
             String searchResultText = searchResult.getText();
             searchResultsStringList.add(searchResultText);
         }

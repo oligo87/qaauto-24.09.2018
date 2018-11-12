@@ -5,8 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import static java.lang.Thread.sleep;
-
 public class PasswordResetSubmitPage extends BasePage{
 
     @FindBy(xpath = "//button[@id='reset-password-submit-button']")
@@ -18,18 +16,9 @@ public class PasswordResetSubmitPage extends BasePage{
     }
 
     public boolean isPageLoaded() {
-        try {
-            sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        waitUntilElementIsClickable(navigateToHomePage);
         return webDriver.getCurrentUrl().contains("/rp/password-reset-submit")
-                && webDriver.getTitle().equals("You've successfully reset your password. | LinkedIn")
-                && isNavigateToHomePageDisplayed();
-    }
-
-    private boolean isNavigateToHomePageDisplayed() {
-        return navigateToHomePage.isDisplayed();
+                && webDriver.getTitle().equals("You've successfully reset your password. | LinkedIn");
     }
 
     public HomePage navigateToHomePage() {
